@@ -48,7 +48,7 @@
 
     {{ HTML::style('css/blueimp-gallery.min.css') }}
 
-    {{ HTML::style('css/bootstrap-select.css')}}
+    {{-- HTML::style('css/bootstrap-select.css') --}}
 
     {{-- HTML::style('css/style.css') --}}
 
@@ -78,6 +78,10 @@
 
     @media (max-width: 980px) {
     /* Enable use of floated navbar text */
+        body {
+            padding-top: 0px;
+        }
+
         .navbar-text.pull-right {
             float: none;
             padding-left: 5px;
