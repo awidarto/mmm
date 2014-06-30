@@ -58,7 +58,7 @@ Route::controller('glossary', 'GlossaryController');
 Route::controller('activity', 'ActivityController');
 Route::controller('access', 'AccessController');
 
-Route::controller('inprop', 'InpropController');
+Route::controller('profile', 'ProfileController');
 Route::controller('homeslide', 'HomeslideController');
 
 

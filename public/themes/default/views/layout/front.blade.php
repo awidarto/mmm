@@ -99,6 +99,8 @@
 
     {{ HTML::style('css/bootstrap-wysihtml5-0.0.2.css') }}
 
+    {{ HTML::style('css/buttons.css') }}
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
@@ -147,14 +149,39 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span2">
-            <div class="well">
+        <div class="span3">
+            <div class="well" style="background-color:#F2F1EF;text-align:center;">
 
             @if(Auth::check())
-                <p class="navbar-text" style="color:#555;">
-                    Hello {{ Auth::user()->fullname }}&nbsp;&nbsp;
-                    <a class="btn btn-info" href="{{ URL::to('logout')}}" style="color:white;background-color:maroon;" ><i class="icon-signout"></i>&nbsp;Logout</a>
-                </p>
+                <style type="text/css">
+                    #profile-pic{
+                        width: 160px;
+                        height: 160px;
+                        overflow: hidden;
+                        border-radius: 50%;
+                        margin:auto;
+                        display: block;
+                    }
+
+                    #change-pic{
+                        cursor: pointer;
+                    }
+                </style>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('#change-pic').on('click',function(){
+                            $('#upload-modal').modal();
+                        });
+                    });
+                </script>
+                <div id="profile-pic">
+                    <img src="{{ (isset(Auth::user()->pic_url)?Auth::user()->pic_url: URL::to('images/defaultpic.jpg') ) }}" />
+                </div>
+                <span id="change-pic">Change</span>
+                <h4 class="navbar-text" style="color:#555;text-align:center;">
+                    {{ Auth::user()->fullname }}
+                </h4>
+                <a class="btn btn-info" href="{{ URL::to('logout')}}" style="color:white;background-color:maroon;" ><i class="icon-signout"></i>&nbsp;Logout</a>
             @else
                 <form method="POST" action="{{ URL::to('login')}}" class="navbar-form pull-right">
                     <input name="email" class="span2" type="text" placeholder="Email">
@@ -165,7 +192,7 @@
 
             </div>
         </div>
-        <div class="span7 well">
+        <div class="span6 well">
             @yield('content')
         </div><!--/span-->
         <div class="span2">
@@ -180,6 +207,30 @@
       </footer>
 
     </div><!--/.fluid-container-->
+
+    <div id="upload-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Upload Pictures</span></h3>
+      </div>
+      <div class="modal-body" >
+            <h4 id="upload-title-id"></h4>
+            {{ Former::open()->id('upload-form') }}
+            {{ Former::hidden('upload_id')->id('upload-id') }}
+
+            <?php
+                $fupload = new Fupload();
+            ?>
+
+            {{ $fupload->id('pictureupload')->title('Select Images')->label('Upload Images')->make() }}
+
+            {{ Former::close() }}
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-primary" id="do-upload">Save changes</button>
+      </div>
+    </div>
 
     <!-- Le javascript
     ================================================== -->
