@@ -194,3 +194,29 @@ a.btn {
 .row-fluid [class*="span"]{
     min-height: 26px;
 }
+
+.navbar .nav > li > a {
+    font-size: 16px;
+}
+
+.navbar .nav > li > a i{
+    font-size: 18px;
+    margin-right: 2px;
+}
+
+.dropdown-menu > li > a{
+    font-size: 14px;
+}
+
+.dropdown-menu > li > a i{
+    font-size: 16px;
+    margin-right: 2px;
+}
+
+.navbar-inner{
+    background-color: #96281B;
+}
+
+.navbar .brand{
+    color: #FFF;
+}

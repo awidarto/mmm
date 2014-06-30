@@ -15,6 +15,26 @@ class HomeController extends BaseController {
 	|
 	*/
 
+    public function getIndex()
+    {
+
+    }
+
+    public function getFeed()
+    {
+        $feed = Feed::where('shareto','public')
+                    ->orWhere('shareto',Auth::user()->email)
+                    ->orderBy('createdDate')
+                    ->take(20)
+                    ->get()->toArray();
+        return View::make('tables.feed')->with('feed',$feed);
+    }
+
+    public function postFeed()
+    {
+
+    }
+
 	public function showWelcome()
 	{
 		return View::make('hello');

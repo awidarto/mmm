@@ -1,8 +1,8 @@
 <?php
 return array(
     'user_field'=>'email',
-    'password_field'=>'pass',
-    'user_collection'=>'users',
+    'password_field'=>'password',
+    'user_collection'=>'members',
     'invalidchars'=>array('%','&','|',' ','"',':',';','\'','\\','?','#','(',')','/'),
     'default_theme'=>'default',
 

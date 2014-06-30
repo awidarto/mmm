@@ -1,0 +1,75 @@
+body{
+    font-family: "Lato","Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.header-11-sub {
+    padding-top: 110px;
+    padding-bottom: 110px;
+    color: #bdc3c7;
+    position: relative;
+}
+
+.header-11-sub p, .header-11-sub h3, .header-11 .navbar {
+    font-family: "Lato","Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.header-11-sub p{
+    font-size: 14px;
+}
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input
+{
+    font-family: "Lato","Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+.price-1 .plan{
+    border-radius:10px;
+}
+
+.plan ul{
+    list-style-type: none;
+    margin-left: -20px;
+}
+
+.plan ul li{
+    font-size: 14px;
+    font-family: "Lato","Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 24px;
+    text-align: left;
+}
+
+.header-11-sub .signup-form form {
+    font-family: "Lato","Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+.price-1 {
+    padding-top: 40px;
+    padding-bottom: 110px;
+}
+
+.btn-primary .badge{
+    background-color: red;
+    color: white;
+}
+
+.next-row{
+    margin-top: 10px;
+}

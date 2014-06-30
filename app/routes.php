@@ -72,7 +72,15 @@ Route::controller('ajax', 'AjaxController');
 
 Route::controller('home', 'HomeController');
 
-Route::get('/', 'SubmissionController@getIndex');
+Route::get('feed','HomeController@getFeed');
+
+Route::get('/',function(){
+    if(Auth::check()){
+        return Redirect::to('feed');
+    }else{
+        return View::make('home');
+    }
+});
 
 
 Route::get('content/pages', 'PagesController@getIndex');
@@ -713,7 +721,7 @@ Route::post('login',function(){
                 // login the user
                 Auth::login($user);
 
-                return Redirect::to('/');
+                return Redirect::to('submission');
 
             } else {
                 // validation not successful
@@ -729,12 +737,72 @@ Route::post('login',function(){
             // user does not exist in database
             // return them to login with message
             Session::flash('loginError', 'This user does not exist.');
-            return Redirect::to('login');
+            return Redirect::to('/');
         }
 
     }
 
 });
+
+Route::post('signup',function(){
+    // validate the info, create rules for the inputs
+    $rules = array(
+        'firstname'    => 'required',
+        'lastname'    => 'required',
+        'email'    => 'required|email',
+        'password' => 'required|alphaNum|min:3|same:repass'
+    );
+
+    // run the validation rules on the inputs from the form
+    $validator = Validator::make(Input::all(), $rules);
+
+    // if the validator fails, redirect back to the form
+    if ($validator->fails()) {
+
+        Event::fire('log.a',array('create account','createaccount',Input::get('email'),'validation fail'));
+
+        Session::flash('signupError', 'validation error');
+        return Redirect::to('/');
+    } else {
+
+        $data = Input::get();
+
+        unset($data['csrf_token']);
+
+
+        $model = new Member();
+
+        $data['createdDate'] = new MongoDate();
+        $data['lastUpdate'] = new MongoDate();
+
+        unset($data['repass']);
+        $data['password'] = Hash::make($data['password']);
+
+        $data['fullname'] = $data['firstname'].' '.$data['lastname'];
+
+
+        if($obj = $model->insert($data)){
+            Event::fire('log.a',array('create account','createaccount',Input::get('email'),'account created'));
+            //Event::fire('product.createformadmin',array($obj['_id'],$passwordRandom,$obj['conventionPaymentStatus']));
+            return Redirect::to('account/success');
+        }else{
+
+            Event::fire('log.a',array('create account','createaccount',Input::get('email'),'fail to create account'));
+
+            return Redirect::to($this->backlink)->with('notify_success',ucfirst(Str::singular($controller_name)).' saving failed');
+        }
+
+    }
+
+
+    return View::make('pages.createaccount');
+});
+
+Route::get('account/success',function(){
+    Event::fire('log.a',array('create account','createaccount','landingpage','account created'));
+    return View::make('pages.createaccountsuccess');
+});
+
 
 Route::get('logout',function(){
     Auth::logout();

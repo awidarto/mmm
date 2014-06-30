@@ -43,11 +43,13 @@
 
         @if(isset($can_add) && $can_add == true)
 	       	<a href="{{ URL::to($addurl) }}" class="btn btn-primary">Add</a>
-	       	<a href="{{ URL::to($importurl) }}" class="btn btn-primary">Import Excel</a>
        	@endif
 
+       	{{--
+       	<a href="{{ URL::to($importurl) }}" class="btn btn-primary">Import Excel</a>
        	<a class="btn" id="download-xls">Download Excel</a>
        	<a class="btn" id="download-csv">Download CSV</a>
+       	--}}
 
         @if(isset($is_report) && $is_report == true)
         	{{ $report_action }}
@@ -257,7 +259,7 @@
 
 {{ $modal_sets }}
 
-<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" style="display:none;">
     <div class="slides"></div>
     <h3 class="title"></h3>
     <a class="prev">‹</a>

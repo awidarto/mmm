@@ -30,7 +30,7 @@
 
     {{ HTML::style('aflat/css/aflat-responsive.css') }}
 
-    {{ HTML::style('bootplus/css/font-awesome.min.css') }}
+    {{ HTML::style('font-awesome/css/font-awesome.min.css') }}
 
     {{ HTML::style('css/dataTables.bootstrap.css') }}
 
@@ -138,20 +138,6 @@
           <a class="brand" href="{{ URL::to('/') }}">{{ Config::get('site.name') }}</a>
           <div class="nav-collapse collapse">
 
-
-                @if(Auth::check())
-                    <p class="navbar-text pull-right">
-                        Hello {{ Auth::user()->fullname }}&nbsp;&nbsp;
-                        <a class="btn btn-primary" href="#" ><i class="icon-cog"></i>&nbsp;Settings</a>
-                        <a class="btn btn-info" href="{{ URL::to('logout')}}" style="color:white;background-color:maroon;" ><i class="icon-signout"></i>&nbsp;Logout</a>
-                    </p>
-                @else
-                    <form method="POST" action="{{ URL::to('login')}}" class="navbar-form pull-right">
-                        <input name="email" class="span2" type="text" placeholder="Email">
-                        <input name="password" class="span2" type="password" placeholder="Password">
-                        <button type="submit" class="btn btn-primary">Sign in</button>
-                    </form>
-                @endif
             @include('partials.topnav')
 
           </div><!--/.nav-collapse -->
@@ -161,9 +147,30 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span12">
+        <div class="span2">
+            <div class="well">
+
+            @if(Auth::check())
+                <p class="navbar-text" style="color:#555;">
+                    Hello {{ Auth::user()->fullname }}&nbsp;&nbsp;
+                    <a class="btn btn-info" href="{{ URL::to('logout')}}" style="color:white;background-color:maroon;" ><i class="icon-signout"></i>&nbsp;Logout</a>
+                </p>
+            @else
+                <form method="POST" action="{{ URL::to('login')}}" class="navbar-form pull-right">
+                    <input name="email" class="span2" type="text" placeholder="Email">
+                    <input name="password" class="span2" type="password" placeholder="Password">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                </form>
+            @endif
+
+            </div>
+        </div>
+        <div class="span7 well">
             @yield('content')
         </div><!--/span-->
+        <div class="span2">
+
+        </div>
       </div><!--/row-->
 
       <hr>
