@@ -61,6 +61,8 @@ Route::controller('access', 'AccessController');
 Route::controller('profile', 'ProfileController');
 Route::controller('homeslide', 'HomeslideController');
 
+Route::controller('uploads', 'UploadsController');
+
 
 Route::controller('music', 'MusicController');
 Route::controller('video', 'VideoController');
@@ -721,7 +723,7 @@ Route::post('login',function(){
                 // login the user
                 Auth::login($user);
 
-                return Redirect::to('submission');
+                return Redirect::to('feed');
 
             } else {
                 // validation not successful
@@ -784,12 +786,17 @@ Route::post('signup',function(){
         if($obj = $model->insert($data)){
             Event::fire('log.a',array('create account','createaccount',Input::get('email'),'account created'));
             //Event::fire('product.createformadmin',array($obj['_id'],$passwordRandom,$obj['conventionPaymentStatus']));
-            return Redirect::to('account/success');
+            //return Redirect::to('account/success');
+            Session::flash('signupSuccess', 'Thank you and welcome to Mumomu ! Go ahead, sign in and start exploring!');
+            return Redirect::to('/');
+
         }else{
 
             Event::fire('log.a',array('create account','createaccount',Input::get('email'),'fail to create account'));
 
-            return Redirect::to($this->backlink)->with('notify_success',ucfirst(Str::singular($controller_name)).' saving failed');
+            //return Redirect::to($this->backlink)->with('notify_success',ucfirst(Str::singular($controller_name)).' saving failed');
+            Session::flash('signupError', 'Failed to create member');
+            return Redirect::to('/');
         }
 
     }

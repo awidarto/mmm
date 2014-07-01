@@ -13,7 +13,7 @@
         <li><a href="{{ URL::to('music') }}" {{ sa('music') }} ><i class="fa fa-music"></i> My Music</a></li>
         <li><a href="{{ URL::to('video') }}" {{ sa('video') }} ><i class="fa fa-youtube-play"></i> My Movie</a></li>
         <li><a href="{{ URL::to('playlist') }}" {{ sa('playlist') }} ><i class="fa fa-list"></i> My Playlist</a></li>
-        <li><a href="{{ URL::to('video') }}" {{ sa('video') }} ><i class="fa fa-cloud-upload"></i> My Uploads</a></li>
+        <li><a href="{{ URL::to('uploads') }}" {{ sa('uploads') }} ><i class="fa fa-cloud-upload"></i> My Uploads</a></li>
         <li><a href="{{ URL::to('video') }}" {{ sa('video') }} ><i class="fa fa-usd"></i> My Store</a></li>
 
         <li class="dropdown">

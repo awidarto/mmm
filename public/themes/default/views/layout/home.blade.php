@@ -57,8 +57,8 @@
                             <div class="collapse navbar-collapse pull-right">
                                 <ul class="nav pull-left">
                                     <li class="active"><a href="#">HOME</a></li>
-                                    <li><a href="#about">APPS</a></li>
-                                    <li><a href="#packages">SIGN UP</a></li>
+                                    <li><a href="#apps">APPS</a></li>
+                                    <li><a href="#">SIGN UP</a></li>
                                     <li><a href="#">BLOG</a></li>
                                     <li><a href="#">CONTACT</a></li>
                                 </ul>
@@ -108,6 +108,10 @@
 
                             <p>If you haven't got an account, then let's get started</p>
                             <div class="signup-form">
+                                @if (Session::get('signupSuccess'))
+                                    <div class="alert alert-info">{{ Session::get('signupSuccess') }}</div>
+                                         <button type="button" class="close" data-dismiss="alert"></button>
+                                @endif
                                 @if (Session::get('signupError'))
                                     <div class="alert alert-danger">{{ Session::get('signupError') }}</div>
                                          <button type="button" class="close" data-dismiss="alert"></button>
